@@ -12,19 +12,26 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v3
+    - uses: actions/checkout@v3
 
-      - name: Set up JDK 11
-        uses: actions/setup-java@v3
-        with:
-          java-version: '11'
-          distribution: 'temurin'
-          cache: gradle
+    - name: Set up JDK 11
+      uses: actions/setup-java@v3
+      with:
+        java-version: '11'
+        distribution: 'temurin'
+        cache: gradle
 
-      - name: Change directory to project root
-        run: cd AndroidStudioProjects/DoronilaColorGuessingGame/
+    - name: Change directory to project root
+      run: cd $GITHUB_WORKSPACE/AndroidStudioProjects/DoronilaColorGuessingGame/
 
-      - name: Use Gradle wrapper to build
-        run: |
-          chmod +x gradlew
-          ./gradlew build
+    - name: List files in directory
+      run: ls -la
+
+    - name: Check for gradlew file
+      run: test -f gradlew && echo "gradlew exists" || echo "gradlew does not exist"
+
+    - name: Set executable permission for gradlew
+      run: chmod +x gradlew
+
+    - name: Use Gradle wrapper to build
+      run: $GITHUB_WORKSPACE/AndroidStudioProjects/DoronilaColorGuessingGame/gradlew build
