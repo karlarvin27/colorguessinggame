@@ -27,11 +27,8 @@ jobs:
     - name: List files in directory
       run: ls -la
 
-    - name: Check for gradlew file
-      run: test -f gradlew && echo "gradlew exists" || echo "gradlew does not exist"
-
     - name: Set executable permission for gradlew
       run: chmod +x gradlew
 
     - name: Use Gradle wrapper to build
-      run: $GITHUB_WORKSPACE/AndroidStudioProjects/DoronilaColorGuessingGame/gradlew build
+      run: ./gradlew build
